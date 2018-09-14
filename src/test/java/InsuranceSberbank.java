@@ -2,6 +2,7 @@ import org.junit.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.*;
 
+import java.util.*;
 import java.util.concurrent.*;
 
 /**
@@ -22,7 +23,7 @@ public class InsuranceSberbank {
         BaseURL = "http://www.sberbank.ru/ru/person";
 
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.get(BaseURL);
     }
@@ -43,10 +44,16 @@ public class InsuranceSberbank {
 
         driver.findElement(By.xpath("(//a[contains(text(), \"Оформить онлайн\")])[1]")).click();
 
+        //Переключение на новую вкладку
+
+        ArrayList<String> windows = new ArrayList<String> (driver.getWindowHandles());
+        driver.switchTo().window(windows.get(1));
+
         // На вкладке "Выбор полиса"  выбрать сумму страховой защиты – Минимальная
+
         driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 
-        driver.findElement(By.xpath("//div[text() = \"Минимальная\"]/..")).click();
+        //driver.findElement(By.xpath("//div[text() = \"Минимальная\"]/..")).click();
 
         //Нажать "Оформить"
 
