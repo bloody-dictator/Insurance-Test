@@ -1,6 +1,7 @@
 import org.junit.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.*;
+import org.openqa.selenium.support.ui.*;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -48,16 +49,40 @@ public class InsuranceSberbank {
 
         ArrayList<String> windows = new ArrayList<String> (driver.getWindowHandles());
         driver.switchTo().window(windows.get(1));
+        Wait<WebDriver> wait = new WebDriverWait(driver, 5, 1000);
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[text() = \"Минимальная\"]/.."))));
 
         // На вкладке "Выбор полиса"  выбрать сумму страховой защиты – Минимальная
 
-        driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
-
-        //driver.findElement(By.xpath("//div[text() = \"Минимальная\"]/..")).click();
+        driver.findElement(By.xpath("//div[text() = \"Минимальная\"]/..")).click();
 
         //Нажать "Оформить"
 
         driver.findElement(By.xpath("//span[text() = \"Оформить\"]")).click();
+
+        // На вкладке "Оформить" заполнить поля
+        driver.findElement(By.xpath("(//input[contains(@name, \"surname\")])[1]")).sendKeys("Ivanov");
+        driver.findElement(By.xpath("//input[contains(@name, \"insured0_name\")]")).sendKeys("Petr");
+        driver.findElement(By.xpath("//input[contains(@name, \"insured0_birthDate\")]")).sendKeys("21.12.1990");
+        driver.findElement(By.xpath("(//input[contains(@name, \"surname\")])[2]")).sendKeys("Петров");
+        driver.findElement(By.xpath("//input[@name = \"name\"]")).sendKeys("Иван");
+        driver.findElement(By.xpath("//input[@name = \"middlename\"]")).sendKeys("Иванович");
+        driver.findElement(By.xpath("//input[@name = \"birthDate\"]")).sendKeys("21.12.1990");
+        driver.findElement(By.xpath("//input[@placeholder = \"Серия\"]")).sendKeys("6911");
+        driver.findElement(By.xpath("//input[@placeholder = \"Номер\"]")).sendKeys("391556");
+        driver.findElement(By.xpath("//input[@name = \"issueDate\"]")).sendKeys("20.01.2011");
+        driver.findElement(By.xpath("//textarea[@name = \"issuePlace\"]")).sendKeys("УФМС России");
+
+        //Нажать "Продолжить"
+        driver.findElement(By.xpath("//span[text() = \"Продолжить\"]")).click();
+
+
+
+
+
+
+
+
 
 
 
