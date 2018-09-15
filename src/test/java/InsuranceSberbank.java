@@ -73,21 +73,20 @@ public class InsuranceSberbank {
         driver.findElement(By.xpath("//input[@name = \"issueDate\"]")).sendKeys("20.01.2011");
         driver.findElement(By.xpath("//textarea[@name = \"issuePlace\"]")).sendKeys("УФМС России");
 
+        Assert.assertEquals("Ivanov", driver.findElement(By.xpath("(//input[contains(@name, \"surname\")])[1]")).getAttribute("value"));
+        Assert.assertEquals("Petr", driver.findElement(By.xpath("//input[contains(@name, \"insured0_name\")]")).getAttribute("value"));
+        Assert.assertEquals("21.12.1990", driver.findElement(By.xpath("//input[contains(@name, \"insured0_birthDate\")]")).getAttribute("value"));
+        Assert.assertEquals("Петров", driver.findElement(By.xpath("(//input[contains(@name, \"surname\")])[2]")).getAttribute("value"));
+        Assert.assertEquals("Иван", driver.findElement(By.xpath("//input[@name = \"name\"]")).getAttribute("value"));
+        Assert.assertEquals("Иванович", driver.findElement(By.xpath("//input[@name = \"middlename\"]")).getAttribute("value"));
+        Assert.assertEquals("21.12.1990", driver.findElement(By.xpath("//input[@name = \"birthDate\"]")).getAttribute("value"));
+        Assert.assertEquals("6911", driver.findElement(By.xpath("//input[@placeholder = \"Серия\"]")).getAttribute("value"));
+        Assert.assertEquals("20.01.2011", driver.findElement(By.xpath("//input[@name = \"issueDate\"]")).getAttribute("value"));
+        Assert.assertEquals("УФМС России", driver.findElement(By.xpath("//textarea[@name = \"issuePlace\"]")).getAttribute("value"));
+
         //Нажать "Продолжить"
         driver.findElement(By.xpath("//span[text() = \"Продолжить\"]")).click();
-
-
-
-
-
-
-
-
-
-
-
-
-
+        Assert.assertEquals("Заполнены не все обязательные поля", driver.findElement(By.xpath("//div[contains(text(), \"Заполнены не все обязательные поля\")]")).getText());
 
     }
 
