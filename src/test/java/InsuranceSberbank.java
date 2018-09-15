@@ -93,6 +93,7 @@ public class InsuranceSberbank {
     @After
 
     public void afterSberTest(){
+        driver.quit();
 
     }
 }
